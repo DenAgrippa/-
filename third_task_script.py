@@ -18,12 +18,34 @@ def replaceNA(lines):
 
     return newLines
 
+def filtering(lines):
+    
+    filteredLines = []
 
+    for line in lines:
+        newLine = list(filter(lambda n: n%3 == 0, line))
+        filteredLines.append(newLine)
 
+    return filteredLines
 
+def sumOfEachLine(lines):
+    listOfSums = []
 
+    for line in lines:
+        sum = 0
+        for number in line:
+            sum += number
+        listOfSums.append(sum)
+    
+    return listOfSums
 
-
+def writeToFile(path, result):
+    with open(path, "w") as file:
+        for number in result:
+            file.write(f"{number}\n")
 
 lines = readFile("./data/third_task.txt")
-print(replaceNA(lines))
+replacedNA = replaceNA(lines)
+filteredLines = filtering(replacedNA)
+sums = sumOfEachLine(filteredLines)
+writeToFile("./results/third_task_results.txt", sums)
